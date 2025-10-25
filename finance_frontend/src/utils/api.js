@@ -9,6 +9,8 @@ const api = axios.create({
     },
 });
 
+// a request interceptor more like that
+
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('access_token');
@@ -22,7 +24,7 @@ api.interceptors.request.use(
     }
 );
 
-// Handles users request => (401 erroes)
+// Handles users request => (401 erroes) 
 
 api.interceptors.response.use(
     (response) => response,
@@ -38,10 +40,47 @@ api.interceptors.response.use(
                     refresh: refreshToken,
                 });
                 const { access } = response.data;
-        localStorage.setItem('access_token', access);
+                localStorage.setItem('access_token', access);
 
+                originalRequest.headers.Authorization = 'Bearer ${access}';
+                return api(originalRequest);
+            } catch (refreshError){
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                window.location.href = '/login';
+                return Promise.reject(refreshError);
+            }
 
             }
-        }
+            return Promise.reject(error);
     }
 );
+
+export const authAPI = {
+    login: async (username, password) => {
+        const reponse = await axios.post('${API_URL}/token/',{
+            username,
+            password,
+        });
+        return  reponse.data;
+    },
+    register: async(username,email,password) => {
+
+        const response = await axios.post('${API_URL}/register/',{
+            username,
+            email,
+            password,
+        });
+        return reponse.data;
+    },
+};
+
+export const transactionsAPI = {
+    getAll: () => api.get('/transactions/'),
+    getById: (id) => api.get('/transactions/${id}/'),
+    create: (data) => api.post('/transactions/', data),
+    update: (id, data) => api.put('/transactions/${id}/', data),
+    delete: (id) =>  api.delete('/transactions/${id}'),
+    getSummary: () => api.get('transactions/summary'),
+    getByCategory: (categoryId) => api.get('/transactions/by_category/?category_id=${category_id}'),
+};
