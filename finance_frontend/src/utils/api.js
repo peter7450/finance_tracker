@@ -84,3 +84,24 @@ export const transactionsAPI = {
     getSummary: () => api.get('transactions/summary'),
     getByCategory: (categoryId) => api.get('/transactions/by_category/?category_id=${category_id}'),
 };
+
+
+export const categoryAPi = {
+    getAll: () => api.get('/categories/'),
+    getById: (id) => api.get('/categories/{$id}/'),
+    create: (data) => api.post('/categories/', data),
+    update: (id, data) => api.put('/categories/${id}/', data),
+    delete: (id) => api.delete('/categories/${id}'),
+
+}
+
+export const budgetAPI = {
+getAll: () => api.get('/budgets/'),
+getById: (id) => api.get(`/budgets/${id}/`),
+create: (data) => api.post('/budgets/', data),
+update: (id, data) => api.put(`/budgets/${id}/`, data),
+delete: (id) => api.delete(`/budgets/${id}/`),
+getCurrentMonth: () => api.get('/budgets/current_month/'),
+};
+
+export default api;
