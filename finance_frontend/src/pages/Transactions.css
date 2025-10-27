@@ -1,0 +1,67 @@
+    .transactions-page {
+    padding-bottom: 2rem;
+    }
+
+    .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+    margin: 0;
+    color: #1f2937;
+    }
+
+    .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    }
+
+    .form-group {
+    margin-bottom: 1rem;
+    }
+
+    .category-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    }
+
+    .type-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    }
+
+    .type-badge.income {
+    background-color: #d1fae5;
+    color: #065f46;
+    }
+
+    .type-badge.expense {
+    background-color: #fee2e2;
+    color: #991b1b;
+    }
+
+    td.income {
+    color: #10b981;
+    font-weight: 600;
+    }
+
+    td.expense {
+    color: #ef4444;
+    font-weight: 600;
+    }
+
+    .btn-small {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    }
+
