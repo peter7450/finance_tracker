@@ -151,7 +151,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
-
+CORS_ALLOW_CREDIENTIALS = True
 #settings for JWT's
 from datetime import timedelta
 
